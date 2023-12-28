@@ -3,7 +3,7 @@
 L'objectif de ce projet est de créer une application de gestion de réservations reposant sur une architecture de microservices. Chaque ressource et réservation associée seront gérées de manière indépendante par deux microservices distincts. Cette architecture sera soutenue par des composants techniques tels qu'un service Gateway, un service de découverte, et un service de configuration. La sécurité de l'application sera assurée par OAuth2 et OpenID Connect avec Keycloak comme fournisseur d'identité. Le travail demandé implique la création d'une architecture technique, le développement et les tests des microservices, la sécurisation de l'application avec Keycloak, et enfin, le déploiement avec Docker et Docker Compose. Ce rapport documentera chaque étape du processus pour assurer une compréhension complète du projet.
 
 
-## 📦 Dépendances
+## Dépendances
 ![Java](https://img.shields.io/badge/Java-red?style=for-the-badge&logo=java)
 ![Spring](https://img.shields.io/badge/Spring-green?style=for-the-badge&logo=spring)
 ![Framework](https://img.shields.io/badge/Framework-darkblue?style=for-the-badge)
@@ -144,54 +144,82 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 ### Démmarrer keycloak
 J'ai démarée keycloak en utilisant docker 
 
-![Alt text](/micro-services/products.PNG)
+![Alt text](/reservation-captures/keycloak.PNG)
 
 ### Connexion en utilisant le nom d'utilisateur et le mot de passe
 
-![Alt text](/micro-services/products.PNG)
+![Alt text](/reservation-captures/admin.PNG)
 
 ### Création d'un realm
 
-![Alt text](/micro-services/products.PNG)
+![Alt text](/reservation-captures/sdia-realmm.PNG)
 
 ### Création des rôles
 
+![Alt text](/reservation-captures/sdia-realmm.PNG)
+
 ### Création des utilisateurs, attribution des rôles et définition d'un mot de passe
+
+![Alt text](/reservation-captures/users.PNG)
+
+![Alt text](/reservation-captures/wahibaPass.PNG)
+
+![Alt text](/reservation-captures/roleWahiba.PNG)
 
 ### Création d'un client pour l'application angular
 
+![Alt text](/reservation-captures/reservation-client.PNG)
+
+![Alt text](/reservation-captures/reservation-client1.PNG)
+
 ### l'enregistrement d'un user
+
+![Alt text](/reservation-captures/userRegistration.PNG)
 
 ### mapper prédéfini
 
+![Alt text](/reservation-captures/predeined-mapper.PNG)
+
 ### politiques de mot de passe
 
+![Alt text](/reservation-captures/passPolicies.PNG)
+
 ### Personnalisation de l'écran de connexion
+
+![Alt text](/reservation-captures/log-screen.PNG)
 
 # Partie Front-end (Angular)
 
 ## Mise en place d'un Projet Angular avec Authentification Keycloak et Gestion des Réservations et des Ressources
 
 1. ***Créer un nouveau projet Angular***
+   
 ``
 ng new reservation-front-end
 ``
-2. ***installer bootstrap***
+
+3. ***installer bootstrap***
 
 ``
 npm i install bootstrap bootstrap-icons
 ``
+
 3. ***générer des components***
 
 - Reservation componenet:
+  
 ``
 ng g c reservations
 ``
+
 - ressources componenet:
+  
 ``
 ng g c ressources
 ``
+
 - personnes componenet:
+  
 ``
 ng g c personnes
 ``
@@ -217,9 +245,11 @@ Les sections "styles" et "scripts" dans le fichier angular.json sont utilisées 
 
 5. ***Installer le package npm keycloak-angular***
 C'est un wrapper Angular pour le client JavaScript Keycloak, qui facilite l'intégration d'Angular avec Keycloak pour l'authentification et l'autorisation.
+
 ``
 npm i keycloak-angular
 ``
+
 Puis, on ajoute cette fonction au fichier app.modules.ts
 
 ```java
@@ -513,17 +543,38 @@ export class RessourcesComponent implements OnInit{
 
 }
 ```
-## Test sans utilier Keycloak pour l'authentification
+## Test avant l'utilisation de Keycloak pour l'authentification
+- **Ressources**
 
-![Alt text](/reservation-captures/ressourcesId.PNG)
+![Alt text](/reservation-captures/reser-ang.PNG)
+
+- **Personnes**
 
 ![Alt text](/reservation-captures/Pers_ang.PNG)
 
-![Alt text](/reservation-captures/ressourcesId.PNG)
+- **Reservation d'une personne**
 
-![Alt text](/reservation-captures/ressourcesId.PNG)
+![Alt text](/reservation-captures/reser-ang.PNG)
 
-![Alt text](/reservation-captures/ressourcesId.PNG)
+## Test en utilisant Keycloak
+
+### S'authentifier en tant que admin
+D'abord, on tape le username et le password
+
+![Alt text](/reservation-captures/logSec.PNG)
+
+Donc, puisque je suis admin je peux voir la liste de personnes et leurs reservations
+![Alt text](/reservation-captures/logWahiba.PNG)
+
+![Alt text](/reservation-captures/reser2.PNG)
+
+### S'authentifier en tant que user 
+
+![Alt text](/reservation-captures/user1.PNG)
+
+Donc, dans ce cas user1 peut voir seulement la liste de ressources
+![Alt text](/reservation-captures/user1Log.PNG)
+
 
 
 
