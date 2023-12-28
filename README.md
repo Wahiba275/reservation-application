@@ -44,9 +44,9 @@ Vous pouvez consulter tous les services enregistrés en accédant à : <br>
 
 Voici les services enregistrés :
 
-![Alt text](/reservation-captures/consul.PNG)
-
 ![Alt text](/reservation-captures/consul1.PNG)
+
+![Alt text](/reservation-captures/consul2.PNG)
 
 ### Gateway Service
 
