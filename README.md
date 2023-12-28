@@ -1,7 +1,26 @@
-# Partie Backend
-## Introduction 
+# Table des Matières
+- [Introduction](#introduction)
+- [Partie Backend](#partie-backend)
+  - [Dépendances](#dépendances)
+  - [Services](#services)
+    - [Config Service](#config-service)
+    - [Gateway Service](#gateway-service)
+    - [Reservation Service](#reservation-service)
+    - [Ressource Service](#ressource-service)
+  - [Configurer Keycloak](#configurer-keycloak)
+
+- [Partie Front-end (Angular)](#partie-front-end-angular)
+  - [Mise en place d'un Projet Angular avec Authentification Keycloak et Gestion des Réservations et des Ressources](#mise-en-place-dun-projet-angular-avec-authentification-keycloak-et-gestion-des-réservations-et-des-ressources)
+  - [Test avant l'utilisation de Keycloak pour l'authentification](#test-avant-lutilisation-de-keycloak-pour-lauthentification)
+  - [Test en utilisant Keycloak](#test-en-utilisant-keycloak)
+    - [S'authentifier en tant que admin](#sauthentifier-en-tant-que-admin)
+    - [S'authentifier en tant que user](#sauthentifier-en-tant-que-user)
+
+
+# Introduction 
 L'objectif de ce projet est de créer une application de gestion de réservations reposant sur une architecture de microservices. Chaque ressource et réservation associée seront gérées de manière indépendante par deux microservices distincts. Cette architecture sera soutenue par des composants techniques tels qu'un service Gateway, un service de découverte, et un service de configuration. La sécurité de l'application sera assurée par OAuth2 et OpenID Connect avec Keycloak comme fournisseur d'identité. Le travail demandé implique la création d'une architecture technique, le développement et les tests des microservices, la sécurisation de l'application avec Keycloak, et enfin, le déploiement avec Docker et Docker Compose. Ce rapport documentera chaque étape du processus pour assurer une compréhension complète du projet.
 
+# Partie Backend
 
 ## Dépendances
 ![Java](https://img.shields.io/badge/Java-red?style=for-the-badge&logo=java)
@@ -25,7 +44,9 @@ Vous pouvez consulter tous les services enregistrés en accédant à : <br>
 
 Voici les services enregistrés :
 
-![Alt text](/micro-services/services.PNG)
+![Alt text](/reservation-captures/consul.PNG)
+
+![Alt text](/reservation-captures/consul1.PNG)
 
 ### Gateway Service
 
@@ -91,7 +112,7 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
     }
 ```
    
-![Alt text](/reservation-captures/personnes1.PNG)
+![Alt text](/reservation-captures/personnes.PNG)
 
 4. ***Obtenir une personne par ID***
  ```java
@@ -104,7 +125,7 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
     }
 ```
 
-![Alt text](/reservation-captures/personnes.PNG)
+![Alt text](/reservation-captures/pById.PNG.PNG)
 
 4. ***Obtenir les reservations d'une personne***
  ```java
