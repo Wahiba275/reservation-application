@@ -58,6 +58,10 @@ J'ai démarée keycloak en utilisant docker
 
 ![Alt text](/micro-services/products.PNG)
 
+### Connexion en utilisant le nom d'utilisateur et le mot de passe
+
+![Alt text](/micro-services/products.PNG)
+
 ### Création d'un realm
 
 ![Alt text](/micro-services/products.PNG)
