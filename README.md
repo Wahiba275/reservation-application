@@ -1,3 +1,7 @@
+
+## Introduction 
+L'objectif de ce projet est de créer une application de gestion de réservations reposant sur une architecture de microservices. Chaque ressource et réservation associée seront gérées de manière indépendante par deux microservices distincts. Cette architecture sera soutenue par des composants techniques tels qu'un service Gateway, un service de découverte, et un service de configuration. La sécurité de l'application sera assurée par OAuth2 et OpenID Connect avec Keycloak comme fournisseur d'identité. Le travail demandé implique la création d'une architecture technique, le développement et les tests des microservices, la sécurisation de l'application avec Keycloak, et enfin, le déploiement avec Docker et Docker Compose. Ce rapport documentera chaque étape du processus pour assurer une compréhension complète du projet.
+
 ### Config Service
 Le service de configuration est responsable de la gestion des configurations de tous les autres services dans le système. <br>
 Pour démarrer le serveur Consul, exécutez la commande suivante : <br>
@@ -38,9 +42,41 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 
 ![Alt text](/micro-services/customers.PNG)
 
+![Alt text](/micro-services/customers.PNG)
+
 ### Ressource Service
 
 ![Alt text](/micro-services/products.PNG)
+
+![Alt text](/micro-services/customers.PNG)
+
+
+## Configurer Keycloak 
+
+### Démmarrer keycloak
+J'ai démarée keycloak en utilisant docker 
+
+![Alt text](/micro-services/products.PNG)
+
+### Création d'un realm
+
+![Alt text](/micro-services/products.PNG)
+
+### Création des rôles
+
+### Création des utilisateurs, attribution des rôles et définition d'un mot de passe
+
+### Création d'un client pour l'application angular
+
+### l'enregistrement d'un user
+
+### mapper prédéfini
+
+### politiques de mot de passe
+
+### Personnalisation de l'écran de connexion
+
+
 
 
 
