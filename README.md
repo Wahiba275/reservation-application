@@ -155,7 +155,6 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 
 ![Alt text](/reservation-captures/reservationByIdPers.PNG)
 
-![Alt text](/reservation-captures/reservationByIdPers.PNG)
 
 ### Ressource Service
 
