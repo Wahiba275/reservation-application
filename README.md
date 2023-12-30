@@ -231,6 +231,122 @@ J'ai démarée keycloak en utilisant docker
 
 ![Alt text](/reservation-captures/log-screen.PNG)
 
+## Sécuriser Backend
+### Sécuriser reservations-service
+
+La première chose à faire est d'ajouter la dépendance suivante :
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-oauth2-resource-server -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+```
+
+Ensuite, créez un répertoire pour la sécurité. Ce répertoire contient les deux classes ci-dessous :
+
+```java
+package ma.enset.reservationservice.sec;
+
+
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.stereotype.Component;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Component
+public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
+    private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter=new JwtGrantedAuthoritiesConverter();
+
+
+    @Override
+    public AbstractAuthenticationToken convert(Jwt jwt) {
+        Collection<GrantedAuthority> authorities = Stream.concat(
+                jwtGrantedAuthoritiesConverter.convert(jwt).stream(),
+                extractResourceRoles(jwt).stream()
+        ).collect(Collectors.toSet());
+        return new JwtAuthenticationToken(jwt, authorities,jwt.getClaim("preferred_username"));
+    }
+
+    private Collection<GrantedAuthority> extractResourceRoles(Jwt jwt) {
+        Map<String , Object> realmAccess;
+        Collection<String> roles;
+        if(jwt.getClaim("realm_access")==null){
+            return Set.of();
+        }
+        realmAccess = jwt.getClaim("realm_access");
+        roles = (Collection<String>) realmAccess.get("roles");
+        return roles.stream().map(role->new SimpleGrantedAuthority(role)).collect(Collectors.toSet());
+    }
+
+}
+```
+Donc **JwtAuthConverter** joue un rôle crucial dans la configuration de la sécurité en personnalisant le processus d'extraction des autorisations à partir des jetons **JWT**, ce qui est essentiel pour l'authentification et l'autorisation dans une application Spring Boot intégrant **OAuth2**.
+
+```java
+package ma.enset.reservationservice.sec;
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
+public class SecurityConfig {
+
+    private  JwtAuthConverter jwtAuthConverter;
+
+    public SecurityConfig(JwtAuthConverter jwtAuthConverter) {
+        this.jwtAuthConverter = jwtAuthConverter;
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                //.cors(Customizer.withDefaults())
+                .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
+                .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
+                .headers(h->h.frameOptions(fo->fo.disable()))
+                .csrf(csrf->csrf.ignoringRequestMatchers("/h2-console/**"))
+                .build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+}
+```
+
+La classe **SecurityConfig** représente la configuration de sécurité pour l'application Spring Boot intégrant OAuth2. Cette configuration utilise une classe appelée **JwtAuthConverter** pour convertir un jeton **JWT (JSON Web Token)** en une instance d'authentification utilisée par Spring Security. L'application est configurée pour autoriser toutes les requêtes authentifiées, en utilisant le mécanisme **OAuth2** comme serveur de ressources. De plus, des ajustements sont apportés aux en-têtes HTTP pour désactiver la protection contre les attaques de type **Clickjacking** (frameOptions). Le système de gestion des autorisations basé sur les rôles est enrichi en extrayant les rôles spécifiques des ressources du jeton JWT. En ce qui concerne la sécurité **CORS (Cross-Origin Resource Sharing)**, une configuration est définie pour permettre l'accès depuis n'importe quelle origine, méthode, et en-tête. Cette configuration utilise les annotations de Spring, telles que **@Configuration**, **@EnableWebSecurity**, et **@EnableMethodSecurity**, pour définir la configuration de sécurité de l'application.
+
 # Partie Front-end (Angular)
 
 ## Mise en place d'un Projet Angular avec Authentification Keycloak et Gestion des Réservations et des Ressources
