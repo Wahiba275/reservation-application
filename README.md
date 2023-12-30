@@ -94,6 +94,9 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 ```
 ![Alt text](/reservation-captures/rs.PNG)
 
+![Alt text](/reservation-captures/rese.PNG)
+
+
 3. ***Obtenir une reservations par ID***
 
 ```java
@@ -104,6 +107,10 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 ```
 
 ![Alt text](/reservation-captures/rById.PNG)
+
+![Alt text](/reservation-captures/s1.PNG)
+
+![Alt text](/reservation-captures/s2.PNG)
 
 3. ***La liste de personnes***
  ```java
@@ -120,6 +127,8 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
    
 ![Alt text](/reservation-captures/personnes.PNG)
 
+![Alt text](/reservation-captures/swagger5.PNG)
+
 4. ***Obtenir une personne par ID***
  ```java
    @GetMapping("/Personnes/{id}")
@@ -133,6 +142,8 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 
 ![Alt text](/reservation-captures/pById.PNG)
 
+![Alt text](/reservation-captures/swagger6.PNG)
+
 4. ***Obtenir les reservations d'une personne***
  ```java
   @GetMapping("/Reservations/idPersonne/{id}")
@@ -141,6 +152,8 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
         return reservationList;
     }
 ```
+
+![Alt text](/reservation-captures/reservationByIdPers.PNG)
 
 ![Alt text](/reservation-captures/reservationByIdPers.PNG)
 
@@ -156,6 +169,8 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
    
 ![Alt text](/reservation-captures/ressources.PNG)
 
+![Alt text](/reservation-captures/swagger2.PNG)
+
 2. ***Obtenir une ressource par ID***
  ```java
  @GetMapping("/ressources/{id}")
@@ -165,6 +180,8 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 ```
 
 ![Alt text](/reservation-captures/ressourcesId.PNG)
+
+![Alt text](/reservation-captures/swagger3.PNG)
 
 # Configurer Keycloak 
 
