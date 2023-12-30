@@ -94,7 +94,7 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 ```
 ![Alt text](/reservation-captures/rs.PNG)
 
-![Alt text](/reservation-captures/rese.PNG)
+![Alt text](/reservation-captures/rrrrrrrrrrrrrrrrrr.PNG)
 
 
 3. ***Obtenir une reservations par ID***
@@ -127,7 +127,7 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
    
 ![Alt text](/reservation-captures/personnes.PNG)
 
-![Alt text](/reservation-captures/swagger5.PNG)
+![Alt text](/reservation-captures/pers.PNG)
 
 4. ***Obtenir une personne par ID***
  ```java
@@ -155,7 +155,7 @@ Le morceau de code que j'ai fourni est une méthode Java utilisant Spring Cloud 
 
 ![Alt text](/reservation-captures/reservationByIdPers.PNG)
 
-
+![Alt text](/reservation-captures/jj.PNG)
 ### Ressource Service
 
 1. ***La liste de ressources***
