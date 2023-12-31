@@ -766,7 +766,7 @@ cette commande indique à Docker de construire une image à partir des fichiers 
 
 Après cela, nous créons un fichier docker-compose à la racine du projet. Ce fichier doit contenir les services et les conteneurs que nous allons stocker dans Docker Desktop.
 
-```docker
+```java
 services:
   mysql-db-reservation:
     image: mariadb:10.6
