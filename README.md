@@ -2,7 +2,7 @@
 - [Introduction](#introduction)
 - [Architecture technique du projet](#Architecture-technique-du-projet)
 - [Partie Backend](#partie-backend)
-  - [Dépendances](#dépendances)
+  - [Prérequis](#Prérequis)
   - [Services](#services)
     - [Config Service](#config-service)
     - [Gateway Service](#gateway-service)
@@ -17,7 +17,7 @@
     - [S'authentifier en tant que admin](#sauthentifier-en-tant-que-admin)
     - [S'authentifier en tant que user](#sauthentifier-en-tant-que-user)
       
--[Déploiement de l'application avec Docker et Docker Compose](#Deploiement-de-lapplication-avec-Docker-et-Docker-Compose)
+-[Déploiement de l'application avec Docker et Docker Compose](#Déploiement-de-lapplication-avec-Docker-et-Docker-Compose)
 
 
 # Introduction 
@@ -30,7 +30,7 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 
 # Partie Backend
 
-## Dépendances
+## Prérequis
 ![Java](https://img.shields.io/badge/Java-red?style=for-the-badge&logo=java)
 ![Spring](https://img.shields.io/badge/Spring-green?style=for-the-badge&logo=spring)
 ![Framework](https://img.shields.io/badge/Framework-darkblue?style=for-the-badge)
@@ -40,6 +40,13 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 ![OAuth2](https://img.shields.io/badge/OAuth2-blue?style=for-the-badge)
 ![OIDC](https://img.shields.io/badge/OIDC-purple?style=for-the-badge)
 ![Consul](https://img.shields.io/badge/Consul-blue?style=for-the-badge&logo=consul)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-green?style=for-the-badge&logo=spring)
+![Swagger](https://img.shields.io/badge/Swagger-orange?style=for-the-badge&logo=swagger)
+![Docker](https://img.shields.io/badge/Docker-blue?style=for-the-badge&logo=docker)
+![Git](https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-purple?style=for-the-badge&logo=bootstrap)
+![Maven](https://img.shields.io/badge/Maven-orange?style=for-the-badge&logo=apache-maven)
+
 
 ## Services
 
