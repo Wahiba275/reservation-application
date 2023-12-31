@@ -31,14 +31,12 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 # Partie Backend
 
 ## Prérequis
-![Java](https://img.shields.io/badge/Java-red?style=for-the-badge&logo=java)
-![Spring](https://img.shields.io/badge/Spring-green?style=for-the-badge&logo=spring)
-![Framework](https://img.shields.io/badge/Framework-darkblue?style=for-the-badge)
-![Keycloak](https://img.shields.io/badge/Keycloak-yellow?style=for-the-badge&logo=keycloak)
-![Angular](https://img.shields.io/badge/Angular-red?style=for-the-badge&logo=angular)
-![JWT](https://img.shields.io/badge/JWT-green?style=for-the-badge)
-![OAuth2](https://img.shields.io/badge/OAuth2-blue?style=for-the-badge)
-![OIDC](https://img.shields.io/badge/OIDC-purple?style=for-the-badge)
+[![Java Spring](https://img.shields.io/badge/Java%20Spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
+[![Keycloak](https://img.shields.io/badge/Keycloak-blue?style=for-the-badge&logo=keycloak)](https://www.keycloak.org/)
+[![Angular](https://img.shields.io/badge/Angular-red?style=for-the-badge&logo=angular)](https://angular.io/)
+[![JWT](https://img.shields.io/badge/JWT-orange?style=for-the-badge&logo=json-web-tokens)](https://jwt.io/)
+[![OAuth2](https://img.shields.io/badge/OAuth2-blueviolet?style=for-the-badge&logo=oauth)](https://oauth.net/2/)
+[![OIDC](https://img.shields.io/badge/OIDC-yellow?style=for-the-badge&logo=openid-connect)](https://openid.net/connect/)
 ![Consul](https://img.shields.io/badge/Consul-blue?style=for-the-badge&logo=consul)
 ![Spring Security](https://img.shields.io/badge/Spring%20Security-green?style=for-the-badge&logo=spring)
 ![Swagger](https://img.shields.io/badge/Swagger-orange?style=for-the-badge&logo=swagger)
