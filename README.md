@@ -31,7 +31,8 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 # Partie Backend
 
 ## Prérequis
-[![Java Spring](https://img.shields.io/badge/Java%20Spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
+[![Java](https://img.shields.io/badge/Java-orange?style=for-the-badge&logo=java)](https://www.java.com/)
+[![Spring](https://img.shields.io/badge/Java%20Spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
 [![Keycloak](https://img.shields.io/badge/Keycloak-blue?style=for-the-badge&logo=keycloak)](https://www.keycloak.org/)
 [![Angular](https://img.shields.io/badge/Angular-red?style=for-the-badge&logo=angular)](https://angular.io/)
 [![JWT](https://img.shields.io/badge/JWT-orange?style=for-the-badge&logo=json-web-tokens)](https://jwt.io/)
