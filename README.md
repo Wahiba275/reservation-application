@@ -1,8 +1,8 @@
 # Table des Matières
 - [Introduction](#introduction)
 - [Architecture technique du projet](#Architecture-technique-du-projet)
+- [Prérequis](#Prérequis)
 - [Partie Backend](#partie-backend)
-  - [Prérequis](#Prérequis)
   - [Services](#services)
     - [Config Service](#config-service)
     - [Gateway Service](#gateway-service)
@@ -27,10 +27,7 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 
 ![Alt text](/reservation-captures/archi.PNG)
 
-
-# Partie Backend
-
-## Prérequis
+# Prérequis
 [![Java](https://img.shields.io/badge/Java-orange?style=for-the-badge&logo=java)](https://www.java.com/)
 [![Spring](https://img.shields.io/badge/Spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
 [![Keycloak](https://img.shields.io/badge/Keycloak-blue?style=for-the-badge&logo=keycloak)](https://www.keycloak.org/)
@@ -46,6 +43,8 @@ L'objectif de ce projet est de créer une application de gestion de réservation
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-purple?style=for-the-badge&logo=bootstrap)
 ![Maven](https://img.shields.io/badge/Maven-orange?style=for-the-badge&logo=apache-maven)
 
+
+# Partie Backend
 
 ## Services
 
