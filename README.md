@@ -756,11 +756,11 @@ cette commande nettoie le répertoire de sortie, compile le code source, crée u
 ```
 docker build . -t reservation-service:v1
 ```
+
+cette commande indique à Docker de construire une image à partir des fichiers situés dans le répertoire actuel, en utilisant les instructions du fichier Dockerfile trouvé dans ce répertoire, et d'étiqueter l'image résultante avec le nom "reservation-service" et le tag "v1".
 ![Alt text](/reservation-captures/image-reservation.PNG)
 
 ![Alt text](/reservation-captures/image-reservation1.PNG)
-
-cette commande indique à Docker de construire une image à partir des fichiers situés dans le répertoire actuel, en utilisant les instructions du fichier Dockerfile trouvé dans ce répertoire, et d'étiqueter l'image résultante avec le nom "reservation-service" et le tag "v1".
 
 Après cela, nous créons un fichier docker-compose à la racine du projet. Ce fichier doit contenir les services et les conteneurs que nous allons stocker dans Docker Desktop.
 
@@ -852,7 +852,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: wa@gmail.com
       PGADMIN_DEFAULT_PASSWORD: azer
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:23.0.1
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres-service:5432/keycloak
@@ -892,11 +892,15 @@ docker compose up -d --build
 
 ![Alt text](/reservation-captures/pgadmin.PNG)
 
+
 ![Alt text](/reservation-captures/pgadmin.PNG)
+
 
 ![Alt text](/reservation-captures/111.PNG)
 
+
 ![Alt text](/reservation-captures/22.PNG)
+
 
 ![Alt text](/reservation-captures/33.PNG)
 
