@@ -735,14 +735,170 @@ Donc, dans ce cas user1 peut voir seulement la liste de ressources
 ![Alt text](/reservation-captures/user1Log.PNG)
 
 
+# Déploiement de l'application avec Docker et Docker Compose
+
+La première étape consiste à générer les fichiers .jar pour chaque service. Pour ce faire, nous ajoutons un fichier nommé Dockerfile qui contient ce qui suit :
+
+```java
+FROM openjdk:17-oracle
+VOLUME /tmp
+COPY target/*.jar  app.jar
+ENTRYPOINT ["java","-jar", "app.jar"]
+```
+
+Ensuite, nous exécutons la commande suivante :
+``
+mvn clean package -DskipTests
+``
+cette commande nettoie le répertoire de sortie, compile le code source, crée un package distribuable (généralement un fichier JAR), et saute l'exécution des tests unitaires. Cela est couramment utilisé lorsqu'on souhaite rapidement construire l'application sans attendre l'exécution complète des tests.
 
 
+```
+docker build . -t reservation-service:v1
+```
+![Alt text](/reservation-captures/image-reservation.PNG)
 
+![Alt text](/reservation-captures/image-reservation1.PNG)
 
+cette commande indique à Docker de construire une image à partir des fichiers situés dans le répertoire actuel, en utilisant les instructions du fichier Dockerfile trouvé dans ce répertoire, et d'étiqueter l'image résultante avec le nom "reservation-service" et le tag "v1".
 
+Après cela, nous créons un fichier docker-compose à la racine du projet. Ce fichier doit contenir les services et les conteneurs que nous allons stocker dans Docker Desktop.
 
+```docker
+services:
+  mysql-db-reservation:
+    image: mariadb:10.6
+    container_name: mysql-db-reservation
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: reservation-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql-db-reservation
+    ports:
+      - "9898:80"
+    environment:
+      PMA_HOST: mysql-db-reservation
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: admin
+  consul:
+    image: consul:1.15.4
+    container_name: consul-container
+    ports:
+      - "8500:8500"  # Port pour l'interface Web de Consul
+      - "8600:8600/udp"  # Port pour le DNS de Consul
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0  # Interface réseau à utiliser par Consul
+      - CONSUL_CLIENT_INTERFACE=eth0  # Interface réseau pour les connexions clientes
+    command: consul agent -server -bootstrap-expect=1 -data-dir=consul -ui -bind=192.168.135.110
+  gateway-service:
+    image: openjdk:17-jdk
+    container_name: gateway-container
+    ports:
+      - "9998:9998"
+    volumes:
+      - ./gateway-service/target/gateway-service.jar:/app/gateway-service.jar
+    command: [ "java", "-jar", "/app/gateway-service.jar" ]
+  service-reservation:
+    build: C:\Users\LENOVO\Downloads\reservation-service
+    container_name: service-reservation
+    ports:
+      - "8083:8083"
+    expose:
+      - '8083'
+    restart: always
+    depends_on:
+      mysql-db-reservation:
+        condition: service_healthy
+    environment:
+      - DB_URL=jdbc:mysql://mysql-db-reservation:3306/reservation-db
+  postgres-service:
+    image: postgres:latest
+    container_name: postgres-service
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    healthcheck:
+      test: "exit 0"
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - "8889:80"
+    environment:
+      PGADMIN_DEFAULT_USER: admin
+      PGADMIN_DEFAULT_EMAIL: wa@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: azer
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-service:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: k1234
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+    restart: always
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    depends_on:
+      postgres-service:
+        condition: service_healthy
+volumes:
+  mysql_data:
+  postgres_data:
+```
+La commande ci-dessous démarre les services définis dans le fichier docker-compose.yml en arrière-plan, en reconstruisant les images au besoin. Cette commande est couramment utilisée lors du développement ou du déploiement d'applications composées de plusieurs services Docker.
 
+``
+docker compose up -d --build
+``
+![Alt text](/reservation-captures/containers.PNG)
 
+![Alt text](/reservation-captures/docker.PNG)
+
+- ***Accès a phpMyadmin***
+![Alt text](/reservation-captures/php.PNG)
+
+![Alt text](/reservation-captures/phpMyAdmin.PNG)
+
+- ***Accès a pgadmin***
+
+![Alt text](/reservation-captures/pgadmin.PNG)
+
+![Alt text](/reservation-captures/pgadmin.PNG)
+
+![Alt text](/reservation-captures/111.PNG)
+
+![Alt text](/reservation-captures/22.PNG)
+
+![Alt text](/reservation-captures/33.PNG)
 
 
 
